@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8E8B8B"
+    android:orientation="vertical"
     tools:context=".SecondFragment">
 
   <com.google.android.material.button.MaterialButton

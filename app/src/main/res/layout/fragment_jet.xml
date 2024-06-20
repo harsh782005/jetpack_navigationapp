@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llfragment"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".jetFragment"
-    android:id="@+id/llfragment">
+    tools:context=".jetFragment">
 
 
-
-   <com.google.android.material.button.MaterialButton
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:id="@+id/btn1"
-       android:text="@string/movetonext"/>
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn1"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/movetonext" />
+<com.google.android.material.button.MaterialButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/pickdate"
+    android:id="@+id/date"
+    android:layout_gravity="center"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/picktime"
+        android:id="@+id/time"
+        android:layout_gravity="center"/>
 </LinearLayout>
