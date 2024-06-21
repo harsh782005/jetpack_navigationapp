@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.Jetpack_navigationapp" parent="Base.Theme.Jetpack_navigationapp" />
+    <style name = "datePickerDialogStyle" parent ="Theme.AppCompat.Light.Dialog">
+         <item name="android:windowBackground">#954CAF</item>
+        <item name="android:textColorPrimary">#F4EDED</item>
+        <item name="android:textColorSecondary">#8C8989</item>
+    </style>
+
+    <style name = "timePickerDialogStyle" parent ="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">#954CAF</item>
+        <item name="android:textColorPrimary">#100F0F</item>
+        <item name="android:textColorSecondary">#8C8989</item>
+    </style>
 </resources>

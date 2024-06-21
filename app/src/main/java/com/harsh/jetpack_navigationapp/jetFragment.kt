@@ -55,11 +55,21 @@ class jetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.btn1?.setOnClickListener {
-            findNavController().navigate(R.id.secondFragment)
+
+
+            if (binding?.etEmail?.text?.toString().isNullOrEmpty()){
+                binding?.etEmail?.error= "enter your mail"
+            }
+            else{
+                var bundle = Bundle()
+                bundle.putString("email", binding?.etEmail?.text?.toString())
+                findNavController().navigate(R.id.secondFragment, bundle)
+
+            }
         }
         binding?.date?.setOnClickListener {
             DatePickerDialog(
-                requireContext(),
+                requireContext(), R.style.datePickerDialogStyle,
                 { _, year, month, date ->
                     Log.e(TAG, "year $year month $month date $date")
                     var calendar = Calendar.getInstance()
@@ -68,18 +78,17 @@ class jetFragment : Fragment() {
                     binding?.date?.setText(formattedDate)
                 },
                 Calendar.getInstance().get(Calendar.YEAR),
-
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DATE),
             ).show()
         }
         binding?.time?.setOnClickListener {
             TimePickerDialog(
-                requireContext(),{ _, hour , minute ->
-                    Log.e(TAG,"hour $hour minute $minute")
+                requireContext(), R.style.timePickerDialogStyle, { _, hour, minute ->
+                    Log.e(TAG, "hour $hour minute $minute")
                     var calendar = Calendar.getInstance()
-                    calendar.set(Calendar.HOUR_OF_DAY,hour)
-                    calendar.set(Calendar.MINUTE,minute)
+                    calendar.set(Calendar.HOUR_OF_DAY, hour)
+                    calendar.set(Calendar.MINUTE, minute)
                     binding?.time?.setText(timeFormat.format(calendar.time))
                 },
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),

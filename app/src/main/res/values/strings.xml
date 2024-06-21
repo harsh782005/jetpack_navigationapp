@@ -6,4 +6,5 @@
     <string name="moveto1">Move to 1</string>
     <string name="pickdate">Pick Date</string>
     <string name="picktime">Pick Time</string>
+    <string name="enteryouremail">Enter your email</string>
 </resources>

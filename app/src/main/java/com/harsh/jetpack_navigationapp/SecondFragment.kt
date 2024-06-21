@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import android.content.Intent
+import android.widget.Toast
 import com.harsh.jetpack_navigationapp.databinding.FragmentJetBinding
 import com.harsh.jetpack_navigationapp.databinding.FragmentSecondBinding
 
@@ -25,6 +28,7 @@ class SecondFragment : Fragment() {
     private var param2: String? = null
    var binding : FragmentSecondBinding?=null
     var mainActivity: MainActivity? = null
+    var email =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,7 @@ class SecondFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+            email = it.getString("email")?:""
         }
     }
 
@@ -47,10 +52,45 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.tvEmail?.setText(email)
+        binding?.et1?.doOnTextChanged { text, start, before, count ->
+            var otp = binding?.et1?.text?.toString() ?: ""
+            if (otp.length == 1) {
+                binding?.et2?.requestFocus()
+            }
+            else{
+                binding?.et1?.requestFocus()
+            }
+        }
+        binding?.et2?.doOnTextChanged { _, _, _, _ ->
+            var otp = binding?.et2?.text?.toString() ?:""
+            if (otp.length == 1) {
+                binding?.et3?.requestFocus()
+            }
+            else{
+                binding?.et2?.requestFocus()
+            }
+        }
+        binding?.et3?.doOnTextChanged { _, _, _, _ ->
+            var otp = binding?.et3?.text?.toString() ?:""
+            if (otp.length == 1) {
+                binding?.et4?.requestFocus()
+            } else{
+                binding?.et3?.requestFocus()
+            }
+        }
         binding?.btn2?.setOnClickListener {
-            findNavController().popBackStack();
+            try{
+                var intent=Intent(Intent.ACTION_SEND)
+                intent.setType("text/email")
+                startActivity(intent)
+            }catch (exception:Exception){
+
+            }
+            findNavController().popBackStack()
         }
     }
+
 
     companion object {
         /**
