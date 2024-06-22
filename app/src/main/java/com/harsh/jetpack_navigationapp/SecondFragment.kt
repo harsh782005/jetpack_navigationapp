@@ -87,7 +87,7 @@ class SecondFragment : Fragment() {
             }catch (exception:Exception){
 
             }
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_secondFragment_to_thirdFragment2)
         }
     }
 

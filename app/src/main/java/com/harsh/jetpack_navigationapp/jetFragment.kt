@@ -5,10 +5,12 @@ import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.harsh.jetpack_navigationapp.databinding.FragmentJetBinding
 import java.text.SimpleDateFormat
@@ -29,6 +31,7 @@ class jetFragment : Fragment() {
     private var param2: String? = null
     var binding: FragmentJetBinding? = null
     var mainActivity: MainActivity? = null
+    var emailPatterns :String ?= "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]";
     private val TAG = "LifecycleFragment"
     var simpleDateFormat = SimpleDateFormat("dd/MMM/yyyy")
     var timeFormat = SimpleDateFormat("hh:mm aa")
@@ -55,12 +58,14 @@ class jetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.btn1?.setOnClickListener {
+            if (binding?.etEmail?.text?.toString().isNullOrEmpty()) {
+                binding?.etEmail?.error = "enter your mail"
 
-
-            if (binding?.etEmail?.text?.toString().isNullOrEmpty()){
-                binding?.etEmail?.error= "enter your mail"
             }
-            else{
+            else if(!Patterns.EMAIL_ADDRESS.matcher(binding?.etEmail?.text.toString()).matches()){
+                binding?.etEmail?.error = "enter valid email"
+            }
+            else {
                 var bundle = Bundle()
                 bundle.putString("email", binding?.etEmail?.text?.toString())
                 findNavController().navigate(R.id.secondFragment, bundle)

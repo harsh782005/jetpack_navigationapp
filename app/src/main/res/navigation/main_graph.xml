@@ -9,10 +9,29 @@
         android:id="@+id/jetFragment"
         android:name="com.harsh.jetpack_navigationapp.jetFragment"
         android:label="fragment_jet"
-        tools:layout="@layout/fragment_jet" />
+        tools:layout="@layout/fragment_jet" >
+        <action
+            android:id="@+id/action_jetFragment_to_secondFragment"
+            app:destination="@id/secondFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.harsh.jetpack_navigationapp.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_second" >
+        <action
+            android:id="@+id/action_secondFragment_to_thirdFragment2"
+            app:destination="@id/thirdFragment2"
+            app:popUpTo="@id/jetFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment2"
+        android:name="com.harsh.jetpack_navigationapp.ThirdFragment"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_third" />
 </navigation>
