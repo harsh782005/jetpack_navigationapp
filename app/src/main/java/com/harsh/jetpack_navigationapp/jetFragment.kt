@@ -31,7 +31,6 @@ class jetFragment : Fragment() {
     private var param2: String? = null
     var binding: FragmentJetBinding? = null
     var mainActivity: MainActivity? = null
-    var emailPatterns :String ?= "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]";
     private val TAG = "LifecycleFragment"
     var simpleDateFormat = SimpleDateFormat("dd/MMM/yyyy")
     var timeFormat = SimpleDateFormat("hh:mm aa")
@@ -73,7 +72,7 @@ class jetFragment : Fragment() {
             }
         }
         binding?.date?.setOnClickListener {
-            DatePickerDialog(
+           var datePickerDialog= DatePickerDialog(
                 requireContext(), R.style.datePickerDialogStyle,
                 { _, year, month, date ->
                     Log.e(TAG, "year $year month $month date $date")
@@ -85,7 +84,13 @@ class jetFragment : Fragment() {
                 Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DATE),
-            ).show()
+            )
+                var calendar = Calendar.getInstance()
+                    calendar.add(Calendar.DATE,-10)
+                     datePickerDialog.datePicker.minDate = calendar.timeInMillis
+            calendar.add(Calendar.DATE,20)
+            datePickerDialog.datePicker.maxDate = calendar.timeInMillis
+                datePickerDialog.show()
         }
         binding?.time?.setOnClickListener {
             TimePickerDialog(
@@ -94,6 +99,8 @@ class jetFragment : Fragment() {
                     var calendar = Calendar.getInstance()
                     calendar.set(Calendar.HOUR_OF_DAY, hour)
                     calendar.set(Calendar.MINUTE, minute)
+                    var newCalendar = Calendar.getInstance()
+                    newCalendar.set(Calendar.HOUR_OF_DAY,9)
                     binding?.time?.setText(timeFormat.format(calendar.time))
                 },
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
