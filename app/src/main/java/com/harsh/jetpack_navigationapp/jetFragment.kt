@@ -117,7 +117,7 @@ class jetFragment : Fragment() {
                         ).show()
 
                     binding?.time?.setText(timeFormat.format(calendar.time))
-                    
+
 
                 },
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
