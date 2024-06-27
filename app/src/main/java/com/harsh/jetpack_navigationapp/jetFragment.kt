@@ -103,21 +103,21 @@ class jetFragment : Fragment() {
                     newCalendar.set(Calendar.HOUR_OF_DAY, 9)
                     var newCalendar1 = Calendar.getInstance()
                     newCalendar1.set(Calendar.HOUR_OF_DAY, 6)
-                    if (calendar.before(newCalendar)) {
+                    if (calendar.before(newCalendar))
                         Toast.makeText(
                             requireContext(),
                             "this time cannot set",
                             Toast.LENGTH_LONG
                         ).show()
-                    } else if (calendar.after(newCalendar1)) {
+                    if (calendar.after(newCalendar1))
                         Toast.makeText(
                             requireContext(),
                             "this time cannot set",
                             Toast.LENGTH_LONG
                         ).show()
-                    } else {
-                        binding?.time?.setText(timeFormat.format(calendar.time))
-                    }
+
+                    binding?.time?.setText(timeFormat.format(calendar.time))
+                    
 
                 },
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
