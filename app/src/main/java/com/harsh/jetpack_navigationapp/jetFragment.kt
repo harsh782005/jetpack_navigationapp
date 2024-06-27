@@ -60,11 +60,11 @@ class jetFragment : Fragment() {
             if (binding?.etEmail?.text?.toString().isNullOrEmpty()) {
                 binding?.etEmail?.error = "enter your mail"
 
-            }
-            else if(!Patterns.EMAIL_ADDRESS.matcher(binding?.etEmail?.text.toString()).matches()){
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(binding?.etEmail?.text.toString())
+                    .matches()
+            ) {
                 binding?.etEmail?.error = "enter valid email"
-            }
-            else {
+            } else {
                 var bundle = Bundle()
                 bundle.putString("email", binding?.etEmail?.text?.toString())
                 findNavController().navigate(R.id.secondFragment, bundle)
@@ -72,7 +72,7 @@ class jetFragment : Fragment() {
             }
         }
         binding?.date?.setOnClickListener {
-           var datePickerDialog= DatePickerDialog(
+            var datePickerDialog = DatePickerDialog(
                 requireContext(), R.style.datePickerDialogStyle,
                 { _, year, month, date ->
                     Log.e(TAG, "year $year month $month date $date")
@@ -85,12 +85,12 @@ class jetFragment : Fragment() {
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DATE),
             )
-                var calendar = Calendar.getInstance()
-                    calendar.add(Calendar.DATE,-10)
-                     datePickerDialog.datePicker.minDate = calendar.timeInMillis
-            calendar.add(Calendar.DATE,20)
+            var calendar = Calendar.getInstance()
+            calendar.add(Calendar.DATE, -10)
+            datePickerDialog.datePicker.minDate = calendar.timeInMillis
+            calendar.add(Calendar.DATE, 20)
             datePickerDialog.datePicker.maxDate = calendar.timeInMillis
-                datePickerDialog.show()
+            datePickerDialog.show()
         }
         binding?.time?.setOnClickListener {
             TimePickerDialog(
@@ -100,8 +100,23 @@ class jetFragment : Fragment() {
                     calendar.set(Calendar.HOUR_OF_DAY, hour)
                     calendar.set(Calendar.MINUTE, minute)
                     var newCalendar = Calendar.getInstance()
-                    newCalendar.set(Calendar.HOUR_OF_DAY,9)
-                    binding?.time?.setText(timeFormat.format(calendar.time))
+                    newCalendar.set(Calendar.HOUR_OF_DAY, 9)
+                    var newCalendar1 = Calendar.getInstance()
+                    newCalendar1 .set(Calendar.HOUR_OF_DAY,6)
+                    if(calendar.before(newCalendar)){
+                        Toast.makeText(requireContext(),
+                            "this time cannot set",
+                            Toast.LENGTH_LONG).show()
+                    }
+                    else if (calendar.after(newCalendar1)){
+                        Toast.makeText(requireContext(),
+                            "this time cannot set",
+                            Toast.LENGTH_LONG).show()
+                    }
+                    else{
+                        binding?.time?.setText(timeFormat.format(calendar.time))
+                    }
+
                 },
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
                 Calendar.getInstance().get(Calendar.MINUTE),
